@@ -33,5 +33,5 @@ jobs:
       - name: Release
         uses: fnkr/github-action-ghr@v1
         env:
-          GHR_PATH: ./cli/dist/
+          GHR_PATH: ./cli/dist
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
