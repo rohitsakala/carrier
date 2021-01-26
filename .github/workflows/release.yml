@@ -2,8 +2,8 @@ name: Release-pipeline
 
 on:
   push:
-    tags:
-      - '*'
+    branches:
+      - master
         
 jobs:
   build:
