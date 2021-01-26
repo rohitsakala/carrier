@@ -9,10 +9,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: print env
-        run: printenv
       - name: Checkout
         uses: actions/checkout@v2
+      - name: print env
+        run: printenv
       - name: Setup Go for Building
         uses: actions/setup-go@v2
         with:
