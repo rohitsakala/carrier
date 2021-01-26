@@ -9,30 +9,24 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout Repository
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - name: Get Branch
+      - name: Fetch Branch
         id: branch
         run: |
           raw=$(git branch -r --contains ${{ github.ref }})
-          branch_another=${raw##*/}
-          branch=${raw/origin\/}
-          echo $branch
-          echo $branch_another
-          echo "::set-output name=BRANCH_NAME::$branch_another"
-      - run: echo "The selected color is ${{ steps.branch.outputs.BRANCH_NAME }}"
-      - name: print env
-        run: printenv
-      - name: Setup Go for Building
+          branch=${raw##*/}
+          echo "::set-output name=BRANCH_NAME::$branch"
+      - name: Setup Go
         uses: actions/setup-go@v2
         with:
           go-version: '^1.13.7'
-      - name: Build carrier
+      - name: Build Carrier
         if: steps.branch.outputs.BRANCH_NAME == 'main'
         run: make build-all
-      - name: Release
+      - name: Release Carrier
         if: ${{ success() }}
         uses: fnkr/github-action-ghr@v1
         env:
