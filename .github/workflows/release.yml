@@ -1,5 +1,4 @@
 name: Release-pipeline
-
 on:
   push:
     tags:
