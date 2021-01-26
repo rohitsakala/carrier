@@ -18,7 +18,7 @@ jobs:
         run: |
           raw=$(git branch -r --contains ${{ github.ref }})
           branch=${raw/origin\/}
-          echo "::set-output name=BRANCH_NAME::${branch}"
+          echo "::set-output name=BRANCH_NAME::$branch"
       - run: echo "The selected color is ${{ steps.branch.BRANCH_NAME }}"
       - name: print env
         run: printenv
