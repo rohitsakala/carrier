@@ -2,8 +2,8 @@ name: Release-pipeline
 
 on:
   push:
-    branches:
-      - main
+    tags:
+      - '*'
         
 jobs:
   build:
@@ -13,8 +13,13 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-      - uses: olegtarasov/get-tag@v2.1
-        id: tagName
+      - name: Get Branch
+        run: |
+          raw=$(git branch -r --contains ${{ github.ref }})
+          branch=${raw/origin\/}
+          echo "BRANCH_NAME=$(echo ${branch})" >> $GITHUB_ENV
+      - run: echo ${BRANCH_NAME}
+      if: env.BRANCH_NAME == 'main'
       - name: print env
         run: printenv
       - name: Setup Go for Building
