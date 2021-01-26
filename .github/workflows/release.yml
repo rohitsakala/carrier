@@ -21,7 +21,7 @@ jobs:
           branch=${raw/origin\/}
           echo $branch
           echo $branch_another
-          echo "::set-output name=BRANCH_NAME::$branch"
+          echo "::set-output name=BRANCH_NAME::$branch_another"
       - run: echo "The selected color is ${{ steps.branch.outputs.BRANCH_NAME }}"
       - name: print env
         run: printenv
