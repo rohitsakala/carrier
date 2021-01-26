@@ -17,8 +17,10 @@ jobs:
         id: branch
         run: |
           raw=$(git branch -r --contains ${{ github.ref }})
+          branch_another=${raw##*/}
           branch=${raw/origin\/}
           echo $branch
+          echo $branch_another
           echo "::set-output name=BRANCH_NAME::$branch"
       - run: echo "The selected color is ${{ steps.branch.outputs.BRANCH_NAME }}"
       - name: print env
